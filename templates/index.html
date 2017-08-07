@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+      <title>Ninja Gold</title>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Play Ninja Gold!!</h2>
+        <p id="text1">Your Gold Pieces:</p>
+        <p id="amount1">{{ purse }}</p><br>
+        <div id="box1">
+            <h3>Farm</h3>
+            <p>(earn 10-20 pieces of Gold)</p>
+            <form action="/process" method="POST">
+                <input type="hidden" name="process" value="farm">
+                <input type="submit" value="Visit Farm">
+            </form>
+        </div>
+        <div id="box2">
+            <h3>Cave</h3>
+            <p>(earn 5-10 pieces of Gold)</p>
+            <form action="/process" method="POST">
+                <input type="hidden" name="process" value="cave">
+                <input type="submit" value="Visit Cave">
+            </form>            
+            </div>
+        <div id="box3">
+            <h3>House</h3>
+            <p>(earn 2-5 pieces of Gold)</p>
+            <form action="/process" method="POST">
+                <input type="hidden" name="process" value="house">
+                <input type="submit" value="Visit House">
+            </form>
+        </div>
+        <div id="box4">
+            <h3>Casino</h3>
+            <p>(earn/(lose) 0-50 pieces of Gold)</p>
+            <form action="/process" method="POST">
+                <input type="hidden" name="process" value="casino">
+                <input type="submit" value="Visit Casino">
+            </form>
+        </div>
+        <form action="/reset" method="POST">
+            <input id="reset" type="submit" value="Reset">
+        </form>
+        <div id="container2">
+            {% for x in session['list'] %}
+                {% if 'Entered' in x %}
+                    <p id="red">{{ x }}</p>
+                {% else %}
+                    <p id="green">{{ x }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    </body>
+</html>
